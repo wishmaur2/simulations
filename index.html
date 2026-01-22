@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <!-- Add CSS at the head of HTML file -->
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">Determining Wavelength Using Diffraction Grating</div>
@@ -23,8 +25,7 @@
                 <div id="base-line"></div>
 
                 <img id="laser" src="./images/laser-image.png" alt="Laser Source">
-                <div id="laser-beam"></div> <!-- Laser Beam -->
-                <img id="grating" src="./images/grating-image.png" alt="Diffraction Grating">
+                <img id="grating" src="./images/grating-image1.png" alt="Diffraction Grating">
                 <img id="screen" src="./images/screen-image.png" alt="Screen">
             </div>
             <div class="controls">
@@ -41,8 +42,34 @@
             </div>
         </div>
         <div class="message-box" id="message">>> Simulator Stopped</div>
+
+
+        <!-- ===== Observation & Calculation Table (Table-1) ===== -->
+        <div id="observationTableContainer">
+            <h3>Observation & Calculation Table</h3>
+
+            <table id="observationTable">
+                <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Order (n)</th>
+                        <th>Distance between Screen & Grating L(cm)</th>
+                        <th>Distance of nth maxima from central maxima S(cm)</th>
+                        <th>Angle θ (deg)</th>
+                        <th>Grating Spacing d(cm)</th>
+                        <th>Wavelength λ (nm)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <button id="addObservationBtn" disabled>Add Observation</button>
+            <button id="clearObservationBtn">Clear Table</button>
+        </div>
+
+
     </div>
-    <!-- Add JS at the bottom of HTML file --> 
-	<script src="./js/main.js"></script>
+    <!-- Add JS at the bottom of HTML file -->
+    <script src="./js/main.js"></script>
 </body>
 </html>
