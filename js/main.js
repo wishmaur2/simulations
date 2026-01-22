@@ -5,12 +5,9 @@ let simulationStarted = false;
 
 function startSimulation() {
     simulationStarted = true;
-
     document.getElementById("message").innerText = ">> Simulator Running";
     document.getElementById("diffractionScreen").style.display = "flex"; // Change to "flex"
     document.getElementById("range-container").style.display = "block";
-    document.getElementById("addObservationBtn").disabled = false;
-
     disableButtonsAfterStart();
     updateMessage();
     initializePositions();
@@ -20,14 +17,10 @@ function resetSimulation() {
     document.getElementById("message").innerText = ">> Simulator Reset";
     document.getElementById("diffractionScreen").style.display = "none";
     document.getElementById("range-container").style.display = "none";
-
-    document.getElementById("addObservationBtn").disabled = true;
-
     document.getElementById("distance").value = 5;
     document.getElementById("distance-value").innerText = "5 cm";
     resetButtons();
     initializePositions();
-    completedDistances.clear();
     setTimeout(() => {
         document.getElementById("message").innerText = ">> Simulation Reset";
     }, 500);
@@ -145,81 +138,30 @@ function initializePositions() {
     grating.style.left = `${defaultPosition}px`;
 }
 
+function showLaserBeam() {
+    let laserBeam = document.getElementById("laser-beam");
+    let laser = document.getElementById("laser");
+    let grating = document.getElementById("grating");
 
+    let laserRect = laser.getBoundingClientRect();
+    let gratingRect = grating.getBoundingClientRect();
+
+    laserBeam.style.display = "block";
+    laserBeam.style.position = "absolute";
+    laserBeam.style.left = `${laserRect.right}px`;
+    laserBeam.style.width = `${gratingRect.left - laserRect.right}px`;
+}
 
 function moveGrating(distance) {
-    const grating = document.getElementById("grating");
-    const displayWidth = document.querySelector('.display-area').offsetWidth;
-    const minPosition = 0.21 * displayWidth;
-    const maxPosition = 0.7 * displayWidth;
-    const newPosition = minPosition + (distance / 40) * (maxPosition - minPosition);
-
+    let grating = document.getElementById("grating");
+    let displayWidth = document.querySelector('.display-area').offsetWidth;
+    let minPosition = 0.21 * displayWidth;
+    let maxPosition = 0.7 * displayWidth;
+    let newPosition = minPosition + (distance / 40) * (maxPosition - minPosition);
+    
     grating.style.left = `${newPosition}px`;
 
+    if (document.getElementById("laser-beam").style.display === "block") {
+        showLaserBeam(); // Update beam dynamically
+    }
 }
-//For Table
-let obsCount = 0;
-const d = 1.8678e-4;
-let completedDistances = new Set();
-
-
-document.getElementById("addObservationBtn").addEventListener("click", () => {
-
-  if (!simulationStarted) {
-    alert("Please turn ON the simulator first");
-    return;
-  }
-
-  const L = parseFloat(document.getElementById("distance").value);
-
-  //  If this distance is already completed
-  if (completedDistances.has(L)) {
-    alert(`Observation for L = ${L} cm is already completed.\nPlease change the distance.`);
-    return;
-  }
-
-  const S1 = parseFloat((L - 7.9).toFixed(1));   // 1st order
-  const S2 = parseFloat((L + 20.5).toFixed(1)); // 2nd order
-
-  addRow(1, L, S1);
-  addRow(2, L, S2);
-
-  completedDistances.add(L);
-});
-
-
-function addRow(n, L, S) {
-
-  // θ = tan⁻¹(S / 2L)
-  const thetaRad = Math.atan(S / (2 * L));
-  const thetaDeg = (thetaRad * 180 / Math.PI).toFixed(2);
-
-  // λ = (d sinθ) / n
-  const lambda_cm = (d * Math.sin(thetaRad)) / n;
-  const lambda_nm = (lambda_cm * 1e7).toFixed(2);
-
-  obsCount++;
-
-  const row = `
-    <tr>
-      <td>${obsCount}</td>
-      <td>${n}</td>
-      <td>${L}</td>
-      <td>${S}</td>
-      <td>${thetaDeg}</td>
-      <td>1.8678 × 10⁻⁴</td>
-      <td>${lambda_nm}</td>
-    </tr>
-  `;
-
-  document.querySelector("#observationTable tbody")
-    .insertAdjacentHTML("beforeend", row);
-}
-
-document.getElementById("clearObservationBtn").addEventListener("click", () => {
-  document.querySelector("#observationTable tbody").innerHTML = "";
-  obsCount = 0;
-  completedDistances.clear(); 
-});
-
-
