@@ -1,3 +1,4 @@
+css
 body {
     font-family: Arial, sans-serif;
     background-color: #f8f8f8;
@@ -80,16 +81,6 @@ button {
     background-color: black;
     z-index: 1;
 }
-#laser-beam {
-    position: absolute;
-    height: 5px;
-    background: red;
-    top: 50%;
-    transform: translateY(-50%);
-    display: none;
-    transition: width 0.5s ease-in-out, left 0.5s ease-in-out;
-}
-
 
 
 /* Positioning for the images */
@@ -110,8 +101,9 @@ button {
 
 #grating {
     left: 30%;
-    width: 45px;
+    width: 55px;
     transition: left 0.5s ease;
+    bottom: 21%;
 }
 
 #screen {
@@ -160,4 +152,97 @@ button {
     width: 10px;
     height: 10px;
     opacity: 0.4;
+}
+/* //add
+*/
+@media screen and (max-width: 768px) {
+    .experiment-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .display-area,
+    .controls {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .display-area {
+        height: 300px;
+    }
+
+    .controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    button {
+        flex: 1 1 40%;
+        max-width: 150px;
+    }
+
+    .range-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .screen-overlay {
+        width: 80%;
+        height: 40%;
+    }
+
+    #laser {
+        width: 60px;
+    }
+
+    #grating {
+        width: 40px;
+    }
+
+    #screen {
+        width: 150px;
+    }
+
+    .message-box {
+        font-size: 14px;
+        height: auto;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .message-box {
+        font-size: 12px;
+    }
+}
+/*For Table*/
+#observationTableContainer {
+  margin: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 2px solid #444;
+}
+
+#observationTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#observationTable th,
+#observationTable td {
+  border: 1px solid #333;
+  padding: 6px;
+  text-align: center;
 }
