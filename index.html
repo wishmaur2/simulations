@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Determining Wavelength Using Diffraction Grating</title>
+    <!-- Add CSS at the head of HTML file -->
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">Determining Wavelength Using Diffraction Grating</div>
+        <div class="experiment-area">
+            <div class="display-area" id="displayArea">
+                <div class="screen-overlay" id="diffractionScreen">
+                    <div class="dot" id="dot1"></div>
+                    <div class="dot" id="dot2"></div>
+                    <div class="dot" id="dot3"></div>
+                    <div class="dot" id="dot4"></div>
+                    <div class="dot" id="dot5"></div>
+                </div>
+                <!-- Base line for alignment -->
+                <div id="base-line"></div>
+
+                <img id="laser" src="./images/laser-image.png" alt="Laser Source">
+                <img id="grating" src="./images/grating-image1.png" alt="Diffraction Grating">
+                <img id="screen" src="./images/screen-image.png" alt="Screen">
+            </div>
+            <div class="controls">
+                <button id="laserBtn" onclick="toggleLaser()">Laser Source</button>
+                <button id="gratingBtn" onclick="toggleGrating()">Grating</button>
+                <button id="screenBtn" onclick="toggleScreen()">Screen</button>
+                <button class="start" id="turnOn" onclick="startSimulation()" disabled>Turn On</button>
+                <button class="reset" onclick="resetSimulation()">Reset All</button>
+                <div class="range-container" id="range-container">
+                    <label for="distance">Adjust Distance Between Screen and Grating (0-40 cm):</label>
+                    <input type="range" id="distance" min="0" max="40" value="5">
+                    <span id="distance-value">5 cm</span>
+                </div>
+            </div>
+        </div>
+        <div class="message-box" id="message">>> Simulator Stopped</div>
+
+
+        <!-- ===== Observation & Calculation Table (Table-1) ===== -->
+        <div id="observationTableContainer">
+            <h3>Observation & Calculation Table</h3>
+
+            <table id="observationTable">
+                <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Order (n)</th>
+                        <th>Distance between Screen & Grating,L(cm)</th>
+                        <th>Distance of nth maxima from central maxima,S(cm)</th>
+                        <th>Angle θ (deg)</th>
+                        <th>Grating Spacing d(cm)</th>
+                        <th>Wavelength λ (nm)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <button id="addObservationBtn" disabled>Add Observation</button>
+            <button id="clearObservationBtn">Clear Table</button>
+        </div>
+
+
+    </div>
+    <!-- Add JS at the bottom of HTML file -->
+    <script src="./js/main.js"></script>
+</body>
+
+</html>

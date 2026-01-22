@@ -1,0 +1,248 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border: 5px solid maroon;
+    border-radius: 10px;
+}
+
+.header {
+    background: #5a6872;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.experiment-area {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.display-area {
+    width: 70%;
+    height: 400px;
+    background: white;
+    border: 2px solid maroon;
+    border-radius: 5px;
+    position: relative;
+}
+
+.controls {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.start { background: yellow; }
+.reset { background: pink; }
+
+.message-box {
+    background: maroon;
+    color: white;
+    padding: 10px;
+    height: 150px;
+    font-family: monospace;
+    overflow-y: auto;
+}
+
+.range-container {
+    display: none;
+    margin-top: 20px;
+}
+
+/* Base line for alignment */
+#base-line {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background-color: black;
+    z-index: 1;
+}
+
+
+/* Positioning for the images */
+#laser,
+#grating,
+#screen {
+    position: absolute;
+    bottom: 20%;
+    transform: translateY(50%);
+    z-index: 2;
+    display: none;
+}
+
+#laser {
+    right: 10%;
+    width: 80px;
+}
+
+#grating {
+    left: 30%;
+    width: 55px;
+    transition: left 0.5s ease;
+    bottom: 21%;
+}
+
+#screen {
+    left: 5%;
+    width: 200px;
+    bottom: 30%;
+}
+
+/* For Screen */
+.screen-overlay {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45%;
+    height: 35%;
+    background-color: #00000010;
+    border: 5px solid black;
+    border-radius: 10px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.dot {
+    position: absolute;
+    background-color: red;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.dot#dot3 {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+}
+
+.dot#dot2, .dot#dot4 {
+    width: 15px;
+    height: 15px;
+    opacity: 0.6;
+}
+
+.dot#dot1, .dot#dot5 {
+    width: 10px;
+    height: 10px;
+    opacity: 0.4;
+}
+/* //add
+*/
+@media screen and (max-width: 768px) {
+    .experiment-area {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .display-area,
+    .controls {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .display-area {
+        height: 300px;
+    }
+
+    .controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    button {
+        flex: 1 1 40%;
+        max-width: 150px;
+    }
+
+    .range-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .screen-overlay {
+        width: 80%;
+        height: 40%;
+    }
+
+    #laser {
+        width: 60px;
+    }
+
+    #grating {
+        width: 40px;
+    }
+
+    #screen {
+        width: 150px;
+    }
+
+    .message-box {
+        font-size: 14px;
+        height: auto;
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .message-box {
+        font-size: 12px;
+    }
+}
+/* //vvv */
+#observationTableContainer {
+  margin: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 2px solid #444;
+}
+
+#observationTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#observationTable th,
+#observationTable td {
+  border: 1px solid #333;
+  padding: 6px;
+  text-align: center;
+}
+
