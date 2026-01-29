@@ -154,6 +154,8 @@ button {
     opacity: 0.4;
 }
 /* For Responsive*/
+/* //add
+*/
 @media screen and (max-width: 768px) {
     .experiment-area {
         flex-direction: column;
