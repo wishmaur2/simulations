@@ -279,7 +279,6 @@ function addRow(n, L, S) {
   // θ = tan⁻¹(S / 2L)
   const thetaRad = Math.atan(S / (2 * L));
   const thetaDeg = (thetaRad * 180 / Math.PI).toFixed(2);
-
   // λ = (d sinθ) / n
   const lambda_cm = (d * Math.sin(thetaRad)) / n;
   const lambda_nm = (lambda_cm * 1e7).toFixed(2);
