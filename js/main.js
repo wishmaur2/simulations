@@ -29,8 +29,6 @@ function resetSimulation() {
     resetButtons();
     completedDistances.clear();
 
-    initializePositions();
-    completedDistances.clear();
     setTimeout(() => {
         document.getElementById("message").innerText = ">> Simulation Reset";
     }, 500);
@@ -153,25 +151,6 @@ function moveGrating(distance) {
 }
 
 /* OBSERVATION TABLE */
-// Set initial positions for the simulation elements
-function initializePositions() {
-    const defaultPosition = 0.21 * displayWidth + (20 / 40) * (0.7 - 0.21) * displayWidth;
-    grating.style.left = `${defaultPosition}px`;
-}
-
-
-
-function moveGrating(distance) {
-    const grating = document.getElementById("grating");
-    const displayWidth = document.querySelector('.display-area').offsetWidth;
-    const minPosition = 0.21 * displayWidth;
-    const maxPosition = 0.7 * displayWidth;
-    const newPosition = minPosition + (distance / 40) * (maxPosition - minPosition);
-
-    grating.style.left = `${newPosition}px`;
-
-}
-/*For Table*/
 let obsCount = 0;
 const d = 1.8678e-4;
 let completedDistances = new Set();
@@ -247,65 +226,3 @@ document.getElementById("procedureToggle").addEventListener("click", () => {
         ? "block"
         : "none";
 });
-
-document.getElementById("addObservationBtn").addEventListener("click", () => {
-
-  if (!simulationStarted) {
-    alert("Please turn ON the simulator first");
-    return;
-  }
-
-  const L = parseFloat(document.getElementById("distance").value);
-
-  //If this distance is already completed
-  if (completedDistances.has(L)) {
-    alert(`Observation for L = ${L} cm is already completed.\nPlease change the distance.`);
-    return;
-  }
-
-  const S1 = parseFloat((L - 7.9).toFixed(1));   // 1st order
-  const S2 = parseFloat((L + 20.5).toFixed(1)); // 2nd order
-
-  addRow(1, L, S1);
-  addRow(2, L, S2);
-
-  //Mark this distance as completed
-  completedDistances.add(L);
-});
-
-
-function addRow(n, L, S) {
-
-  // θ = tan⁻¹(S / 2L)
-  const thetaRad = Math.atan(S / (2 * L));
-  const thetaDeg = (thetaRad * 180 / Math.PI).toFixed(2);
-  // λ = (d sinθ) / n
-  const lambda_cm = (d * Math.sin(thetaRad)) / n;
-  const lambda_nm = (lambda_cm * 1e7).toFixed(2);
-
-  obsCount++;
-
-  const row = `
-    <tr>
-      <td>${obsCount}</td>
-      <td>${n}</td>
-      <td>${L}</td>
-      <td>${S}</td>
-      <td>${thetaDeg}</td>
-      <td>1.8678 x 10⁻⁴</td>
-      <td>${lambda_nm}</td>
-    </tr>
-  `;
-
-  document.querySelector("#observationTable tbody")
-    .insertAdjacentHTML("beforeend", row);
-}
-
-document.getElementById("clearObservationBtn").addEventListener("click", () => {
-  document.querySelector("#observationTable tbody").innerHTML = "";
-  obsCount = 0;
-  completedDistances.clear();
-
-});
-
-
