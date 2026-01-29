@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Determining Wavelength Using Diffraction Grating</title>
-    <!-- Add CSS at the head of HTML file -->
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">Determining Wavelength Using Diffraction Grating</div>
@@ -23,9 +24,31 @@
                 <div id="base-line"></div>
 
                 <img id="laser" src="./images/laser-image.png" alt="Laser Source">
-                <div id="laser-beam"></div> <!-- Laser Beam -->
                 <img id="grating" src="./images/grating-image.png" alt="Diffraction Grating">
                 <img id="screen" src="./images/screen-image.png" alt="Screen">
+
+                <!-- Procedure Info Button -->
+                <div id="procedureToggle">
+                    <span class="info-icon">!</span>
+                    <span class="info-label">Procedure (Simulation Working)</span>
+                </div>
+
+                <!-- Procedure Content -->
+                <div id="procedureBox">
+                    <h4>Procedure (Simulation Working)</h4>
+                    <ol>
+                        <li>Click on <b>Laser Source</b> button to add the laser in the experimental setup.</li>
+                        <li>Click on <b>Grating</b> button to place the diffraction grating between laser and screen.</li>
+                        <li>Click on <b>Screen</b> button to add the observation screen.</li>
+                        <li>After adding Laser, Grating, and Screen, click on <b>Turn On</b> to start the simulation.</li>
+                        <li>A diffraction pattern consisting of a central maximum and higher order maxima appears on the screen.</li>
+                        <li>Adjust the distance between the screen and grating using the slider provided.</li>
+                        <li>Note the distances between the central (0th order) maximum and <b>S₁</b> (first order) and <b>S₂</b> (second order) maxima.</li>
+                        <li>Click on <b>Add Observation</b> to record the readings in the observation table.</li>
+                        <li>Change the distance and repeat the above steps to take multiple readings.</li>
+                    </ol>
+                </div>
+
             </div>
             <div class="controls">
                 <button id="laserBtn" onclick="toggleLaser()">Laser Source</button>
@@ -41,8 +64,35 @@
             </div>
         </div>
         <div class="message-box" id="message">>> Simulator Stopped</div>
+
+
+        <!-- Observation & Calculation Table -->
+        <div id="observationTableContainer">
+            <h3>Observation & Calculation Table</h3>
+
+            <table id="observationTable">
+                <thead>
+                    <tr>
+                        <th>S. No.</th>
+                        <th>Order (n)</th>
+                        <th>Distance between Screen & Grating L(cm)</th>
+                        <th>Distance of nth maxima from central maxima S(cm)</th>
+                        <th>Angle θ (deg)</th>
+                        <th>Grating Spacing d(cm)</th>
+                        <th>Wavelength λ (nm)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+
+            <button id="addObservationBtn" disabled>Add Observation</button>
+            <button id="clearObservationBtn">Clear Table</button>
+        </div>
+
+
     </div>
-    <!-- Add JS at the bottom of HTML file --> 
-	<script src="./js/main.js"></script>
+    <!-- Add JS at the bottom of HTML file -->
+    <script src="./js/main.js"></script>
 </body>
+
 </html>
